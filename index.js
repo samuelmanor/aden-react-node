@@ -26,6 +26,7 @@ app.get('/api/courses', (req, res) => {
     res.send(courses);
 });
 
+// READ
 app.get('/api/courses/:id', (req, res) => {
     const course = courses.find(c => c.id === parseInt(req.params.id));
     if (!course) {
@@ -35,6 +36,7 @@ app.get('/api/courses/:id', (req, res) => {
     res.send(course);
 });
 
+// CREATE
 app.post('/api/courses', (req, res) => {
     //error handling
     if (!req.body.name || req.body.name.length < 3) {
@@ -67,6 +69,27 @@ app.put('/api/courses/:id', (req, res) => {
     // return updated course
     res.send(course);
 });
+
+// DESTROY
+app.delete('/api/courses/:id', (req, res) => {
+    // look up course with given id
+    // if it doesnt exist, 404
+    const course = courses.find(c => c.id === parseInt(req.params.id));
+    if (!course) {
+        res.status(404).send("The course with the given ID was not found.");
+        return;
+    };
+
+    // delete
+    const index = courses.indexOf(course);
+    courses.splice(index, 1);
+
+    // return course that was deleted
+    res.send(course);
+});
+
+
+// sudo mongod --dbpath /Users/smanor/development/data/db
 
 // $ 'npx nodemon index.js'
 const port = process.env.PORT || 3000;
