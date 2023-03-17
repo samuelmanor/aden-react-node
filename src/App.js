@@ -1,23 +1,37 @@
-import logo from './logo.svg';
 import './App.css';
+
+/* crud
+pages: (date, todo, events, entry, images)
+ - create
+ - read
+ - update
+ - destroy
+
+todo:
+ - create
+ - read
+ - update
+ - destroy
+
+events:
+ - create
+ - read
+ - update
+ - destroy
+
+entry: (no create because it will automatically be created upon page creation, no delete because it's required)
+ - read
+ - update
+
+images: (dont need update cause you should delete/create for new image)
+ - create
+ - read
+ - destroy
+*/
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
     </div>
   );
 }
