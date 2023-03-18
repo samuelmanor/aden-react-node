@@ -45,20 +45,20 @@ function App() {
     // backgroundColor: 'red'
   };
 
+  useEffect(() => {
+    pageService.pageCount()
+      .then(initialCount => {
+        setPageCount(initialCount);
+        getPage(initialCount);
+      }); 
+  }, []);
+
   function getPage(id) {
     pageService.getOne(id)
       .then(initialPage => {
         setCurrentPage(initialPage);
       });
   };
-
-  useEffect(() => {
-      pageService.pageCount()
-        .then(initialCount => {
-          setPageCount(initialCount);
-          getPage(initialCount);
-        });
-  }, []);
 
   function changePage(direction) {
     if (direction === 'forward') {

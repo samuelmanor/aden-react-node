@@ -1,12 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
+import ToDo from "./ToDo";
 
 function Page({ page }) {
+    const [toDoArr, setToDoArr] = useState(page.todos);
+
     const pageStyle = {
-        border: '1px solid black'
+        // border: '1px solid black'
     }
     const dateBoxStyle = {
-        color: 'green'
+        // color: 'green'
     };
+
+    const toDos = toDoArr.map(obj => (
+        <ToDo key={obj.id} task={obj.task} completed={obj.completed} />
+    ));
 
     return (
         <div style={pageStyle}>
@@ -16,7 +23,9 @@ function Page({ page }) {
             </div>
 
             <p>{page.entry}</p>
-            {/* <button onClick={() => console.log(currentPage)}>button</button> */}
+
+            {toDos}
+            <button onClick={() => console.log(toDos)}>button</button>
         </div>
     )
 };
