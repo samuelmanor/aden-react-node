@@ -38,42 +38,47 @@ images: (dont need update cause you should delete/create for new image, pages by
 // getMonth() + 1 because its 0-index => 3
 
 function App() {
-  const [allPages, setAllPages] = useState([]);
   const [currentPage, setCurrentPage] = useState({});
+  const [pageCount, setPageCount] = useState(0);
 
   const appStyle = {
     // backgroundColor: 'red'
   };
 
-  useEffect(() => {
-    pageService.read()
-      .then(initialPages => {
-        setAllPages(initialPages);
-
-        const firstPageId = initialPages.length - 1;
-        setCurrentPage(initialPages[firstPageId]);
+  function getPage(id) {
+    pageService.getOne(id)
+      .then(initialPage => {
+        setCurrentPage(initialPage);
       });
+  };
+
+  useEffect(() => {
+      pageService.pageCount()
+        .then(initialCount => {
+          setPageCount(initialCount);
+          getPage(initialCount);
+        });
   }, []);
 
   function changePage(direction) {
     if (direction === 'forward') {
-      const nextPageId = currentPage.id;
-      setCurrentPage(allPages[nextPageId]);
+      const nextPageId = currentPage.id + 1;
+      getPage(nextPageId);
     } else if (direction === 'back') {
-      const nextPageId = currentPage.id - 2;
-      setCurrentPage(allPages[nextPageId]);
+      const nextPageId = currentPage.id - 1;
+      getPage(nextPageId);
     };
   };
 
   return (
     <div style={appStyle}>
-      {/* <button onClick={() => console.log(currentPage)}>console.log current page</button> */}
+      {/* <button onClick={() => console.log(currentPage.id)}>console.log current page</button> */}
       <Page page={currentPage} />
 
       <div>
         {currentPage.id > 1 ? <p onClick={() => changePage('back')}>back</p> : null}
         <p>{currentPage.id}</p>
-        {currentPage.id < allPages.length ? <p onClick={() => changePage('forward')}>forward</p> : null}
+        {currentPage.id < pageCount ? <p onClick={() => changePage('forward')}>forward</p> : null}
       </div>
     </div>
   );
