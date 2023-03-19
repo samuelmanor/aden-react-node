@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function ToDo({ id, task, completed, handleUpdate }) {
     const [editingState, setEditingState] = useState(false);
@@ -30,26 +30,58 @@ function ToDo({ id, task, completed, handleUpdate }) {
             marginTop: 0,
             marginLeft: 10,
             borderBottom: '2px solid rgba(219, 210, 195, 0.8)',
-            width: 250,
+            width: 200,
             fontSize: 17,
+        },
+
+        task: {
+            display: 'inline-block',
+            marginLeft: 10,
+            marginBottom: 16,
+        },
+
+        input: {
+            border: 'none',
+            borderBottom: '2px solid rgba(219, 210, 195, 0.8)',
+            backgroundColor: 'transparent',
+            width: 200,
+            fontSize: 17,
+        },
+
+        button: {
+            border: 'none',
+            backgroundColor: 'transparent',
+            fontSize: 18,
         }
     };
 
     function updateTask() {
-        handleUpdate(id, 'task', taskText);
-        setEditingState(false);
-    }
+        if (taskText === '') {
+            const input = document.getElementById('text-box');
+            input.placeholder = 'cannot be blank!';         // OR: delete whole task and replace with plus button for adding new one
+        } else {
+            handleUpdate(id, 'task', taskText);
+            setEditingState(false);
+        }
+    };
+
+    useEffect(() => {
+        const input = document.getElementById('text-box');
+        if (input) {
+            input.focus();
+        }
+    }, [editingState])
 
     return (
         <div>
             {completed ? <div style={toDoStyle.done}onClick={() => handleUpdate(id, 'state', false)}></div> : <div style={toDoStyle.notDone} onClick={() => handleUpdate(id, 'state', true)}></div>}
-            {/* <p style={toDoStyle.p}>{task}</p> */}
+            
             {editingState ? 
-            <div>
-                <input type='text' value={taskText} onChange={(e) => setTaskText(e.target.value)} /> 
-                <button onClick={updateTask}>save</button>
+            <div style={toDoStyle.task}>
+                <input style={toDoStyle.input} type='text' id='text-box' value={taskText} onChange={(e) => setTaskText(e.target.value)} /> 
+                <button style={toDoStyle.button} onClick={updateTask}>save</button>
             </div>
-            : <p onClick={() => setEditingState(editingState => !editingState)} style={toDoStyle.p}>{task}</p>}
+            : <p onClick={() => setEditingState(true)} style={toDoStyle.p}>{task}</p>}
         </div>
     );
 };
