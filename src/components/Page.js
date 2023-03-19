@@ -1,8 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ToDo from "./ToDo";
 
-function Page({ page }) {
-    const [toDoArr, setToDoArr] = useState(page.todos);
+function Page({ page, pageService, setCurrentPage }) {
+    const [toDoArr, setToDoArr] = useState({});
+    const [editedPage, setEditedPage] = useState({});
+
+    useEffect(() => {
+        if (page) {
+            setToDoArr(page.todos);
+        }
+    }, [page]);
 
     const pageStyle = {
         // border: '1px solid black'
@@ -11,9 +18,25 @@ function Page({ page }) {
         // color: 'green'
     };
 
-    const toDos = toDoArr.map(obj => (
-        <ToDo key={obj.id} task={obj.task} completed={obj.completed} />
-    ));
+    function mapToDos() {
+        return toDoArr?.map?.(obj => <ToDo key={obj.id} id={obj.id} task={obj.task} completed={obj.completed} updateTask={updateTask} />);
+    };
+
+    function updateTask(taskId, k, newState) {
+        const pageCopy = { ...page };
+
+        if (k === 'task') {
+            // for editing text content
+
+        } else if (k === 'state') {
+            const toDoToUpdate = pageCopy.todos.find(t => t.id === taskId);
+            toDoToUpdate.completed = newState;
+            pageService.update(page.id, pageCopy)
+                .then(
+                    setCurrentPage(pageCopy)
+                )
+        };
+    };
 
     return (
         <div style={pageStyle}>
@@ -24,8 +47,7 @@ function Page({ page }) {
 
             <p>{page.entry}</p>
 
-            {toDos}
-            <button onClick={() => console.log(toDos)}>button</button>
+            {mapToDos()}
         </div>
     )
 };

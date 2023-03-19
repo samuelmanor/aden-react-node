@@ -1,12 +1,13 @@
 import React from "react";
 
-function ToDo({ task, completed }) {
+function ToDo({ id, task, completed, updateTask }) {
     const toDoStyle = {
         // color: 'green'
-    }
+    };
+
     return (
         <div>
-            {completed ? <p>done</p> : <p>not done</p>}
+            {completed ? <p onClick={() => updateTask(id, 'state', false)}>done</p> : <p onClick={() => updateTask(id, 'state', true)}>not done</p>}
             <p>{task}</p>
         </div>
     );

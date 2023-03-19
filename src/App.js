@@ -3,35 +3,6 @@ import { useEffect, useState } from 'react';
 import pageService from './services/Pages';
 import Page from './components/Page';
 
-/* crud
-pages: (date, todo, events, entry, images)
- - create
- - read
- - update
- - destroy
-
-todo:
- - create
- - read
- - update (whole page updates instead?)
- - destroy
-
-events:
- - create
- - read
- - update (whole page updates instead?)
- - destroy
-
-entry: (no create because it will automatically be created upon page creation, no delete because it's required)
- - read
- - update (whole page updates instead?)
-
-images: (dont need update cause you should delete/create for new image, pages by default have "" for all image places)
- - create
- - read
- - destroy
-*/
-
 // new Date ex. Fri Mar 17 2023 16:59:43 GMT-0400 (Eastern Daylight Time)
 // creates as object
 // getDate() => 17
@@ -73,7 +44,7 @@ function App() {
   return (
     <div style={appStyle}>
       {/* <button onClick={() => console.log(currentPage.id)}>console.log current page</button> */}
-      <Page page={currentPage} />
+      {currentPage ? <Page page={currentPage} pageService={pageService} setCurrentPage={setCurrentPage} /> : null}
 
       <div>
         {currentPage.id > 1 ? <p onClick={() => changePage('back')}>back</p> : null}
