@@ -4,7 +4,7 @@ function ToDo({ id, task, completed, handleUpdate }) {
     const [editingState, setEditingState] = useState(false);
     const [taskText, setTaskText] = useState(task);
 
-    const toDoStyle = {
+    const toDoStyle = { // clean this up lol
         done: {
             height: 20,
             width: 20,

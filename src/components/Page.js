@@ -38,16 +38,16 @@ function Page({ page, pageService, setCurrentPage }) {
 
     function handleUpdate(taskId, k, newState) {
         const pageCopy = { ...page };
-        const taskToUpdate = pageCopy.todos.find(t => t.id === taskId);
+        const toDoToUpdate = pageCopy.todos.find(t => t.id === taskId);
 
         if (k === 'task') {
-            taskToUpdate.task = newState;
+            toDoToUpdate.task = newState;
             pageService.update(page.id, pageCopy)
-                .then(setCurrentPage(pageCopy));
+                .then(res => setCurrentPage(res));
         } else if (k === 'state') {
-            taskToUpdate.completed = newState;
+            toDoToUpdate.completed = newState;
             pageService.update(page.id, pageCopy)
-                .then(setCurrentPage(pageCopy));
+                .then(res => setCurrentPage(res));
         };
     };
 
