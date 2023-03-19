@@ -4,7 +4,7 @@ function ToDo({ id, task, completed, handleUpdate }) {
     const [editingState, setEditingState] = useState(false);
     const [taskText, setTaskText] = useState(task);
 
-    const toDoStyle = { // clean this up lol
+    const toDoStyle = {
         done: {
             height: 20,
             width: 20,
@@ -34,6 +34,10 @@ function ToDo({ id, task, completed, handleUpdate }) {
             fontSize: 17,
         },
 
+        blank: {
+            color: '#bfb39b',
+        },
+
         task: {
             display: 'inline-block',
             marginLeft: 10,
@@ -52,17 +56,37 @@ function ToDo({ id, task, completed, handleUpdate }) {
             border: 'none',
             backgroundColor: 'transparent',
             fontSize: 18,
+            cursor: 'pointer'
         }
     };
 
     function updateTask() {
+        handleUpdate(id, 'task', taskText);
+        setEditingState(false);
+
         if (taskText === '') {
-            const input = document.getElementById('text-box');
-            input.placeholder = 'cannot be blank!';         // OR: delete whole task and replace with plus button for adding new one
-        } else {
-            handleUpdate(id, 'task', taskText);
-            setEditingState(false);
+            handleUpdate(id, 'state', false);
         }
+    };
+
+    const toDoInput =
+        <div style={toDoStyle.task}>
+            <input style={toDoStyle.input} type='text' id='text-box' value={taskText} onChange={(e) => setTaskText(e.target.value)} /> 
+            <button style={toDoStyle.button} onClick={updateTask}>save</button>
+        </div>;
+    
+    const toDoReg = <p onClick={() => setEditingState(true)} style={toDoStyle.p}>{task}</p>;
+
+    const toDoBlank = <p onClick={() => setEditingState(true)} style={{ ...toDoStyle.p, ...toDoStyle.blank }}>add new...</p>
+
+    function showToDo() {
+        if (taskText === '' && editingState === false) {
+            return toDoBlank;
+        } else if (editingState === true) {
+            return toDoInput;
+        } else {
+            return toDoReg;
+        };
     };
 
     useEffect(() => {
@@ -70,18 +94,12 @@ function ToDo({ id, task, completed, handleUpdate }) {
         if (input) {
             input.focus();
         }
-    }, [editingState])
+    }, [editingState]);
 
     return (
         <div>
             {completed ? <div style={toDoStyle.done}onClick={() => handleUpdate(id, 'state', false)}></div> : <div style={toDoStyle.notDone} onClick={() => handleUpdate(id, 'state', true)}></div>}
-            
-            {editingState ? 
-            <div style={toDoStyle.task}>
-                <input style={toDoStyle.input} type='text' id='text-box' value={taskText} onChange={(e) => setTaskText(e.target.value)} /> 
-                <button style={toDoStyle.button} onClick={updateTask}>save</button>
-            </div>
-            : <p onClick={() => setEditingState(true)} style={toDoStyle.p}>{task}</p>}
+            {showToDo()}
         </div>
     );
 };

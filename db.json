@@ -55,8 +55,8 @@
           "id": 2
         },
         {
-          "task": "brush teeth",
-          "completed": true,
+          "task": "",
+          "completed": false,
           "id": 3
         }
       ],
