@@ -46,17 +46,17 @@
       "todos": [
         {
           "task": "get groceries",
-          "completed": false,
+          "completed": true,
           "id": 1
         },
         {
           "task": "water plants",
-          "completed": false,
+          "completed": true,
           "id": 2
         },
         {
           "task": "",
-          "completed": false,
+          "completed": true,
           "id": 3
         }
       ],
