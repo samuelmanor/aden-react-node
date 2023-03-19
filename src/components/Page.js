@@ -11,50 +11,62 @@ function Page({ page, pageService, setCurrentPage }) {
     }, [page]);
 
     const pageStyle = {
-        width: 600,
-        height: 600,
-        marginLeft: 20,
-        borderRadius: 15,
+        page: {
+            width: 600,
+            height: 600,
+            marginLeft: 20,
+            borderRadius: 15,
+            backgroundColor: '#efece6',
+        },
 
-        backgroundColor: '#f7f5f2',
+        dateBox: {
+            backgroundColor: 'rgba(219, 210, 195, 0.5)',
+            borderRadius: 15,
+            width: 250,
+            height: 110,
+            marginLeft: 20,
+            marginTop: 20,
+            position: 'absolute',
+        },
+
+        toDo: {
+            position: 'absolute',
+            marginLeft: 280,
+            marginTop: -12,
+        },
     }
-    const dateBoxStyle = {
-        backgroundColor: 'rgba(219, 210, 195, 0.5)',
-        borderRadius: 15,
-        width: 200,
-        marginLeft: 20,
-    };
 
-    function mapToDos() {
-        return toDoArr?.map?.(obj => <ToDo key={obj.id} id={obj.id} task={obj.task} completed={obj.completed} updateTask={updateTask} />);
-    };
-
-    function updateTask(taskId, k, newState) {
+    function handleUpdate(taskId, k, newState) {
         const pageCopy = { ...page };
+        const taskToUpdate = pageCopy.todos.find(t => t.id === taskId);
 
         if (k === 'task') {
-            // for editing text content
-
-        } else if (k === 'state') {
-            const toDoToUpdate = pageCopy.todos.find(t => t.id === taskId);
-            toDoToUpdate.completed = newState;
+            taskToUpdate.task = newState;
             pageService.update(page.id, pageCopy)
-                .then(
-                    setCurrentPage(pageCopy)
-                )
+                .then(setCurrentPage(pageCopy));
+        } else if (k === 'state') {
+            taskToUpdate.completed = newState;
+            pageService.update(page.id, pageCopy)
+                .then(setCurrentPage(pageCopy));
         };
     };
 
+    function mapToDos() {
+        return toDoArr?.map?.(obj => <ToDo key={obj.id} id={obj.id} task={obj.task} completed={obj.completed} handleUpdate={handleUpdate} />);
+    };
+
     return (
-        <div style={pageStyle}>
-            <div style={dateBoxStyle}>
+        <div style={pageStyle.page}>
+            <div style={pageStyle.dateBox}>
                 <h2>{page.day}</h2>
                 <h2>{page.month}</h2>
             </div>
 
             <p>{page.entry}</p>
 
-            {mapToDos()}
+            <div style={pageStyle.toDo}>
+                {mapToDos()}
+            </div>
         </div>
     )
 };
