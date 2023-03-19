@@ -1,4 +1,4 @@
-import './App.css';
+// import './App.css';
 import { useEffect, useState } from 'react';
 import pageService from './services/Pages';
 import Page from './components/Page';
@@ -13,7 +13,18 @@ function App() {
   const [pageCount, setPageCount] = useState(0);
 
   const appStyle = {
-    // backgroundColor: 'red'
+    width: 900,
+    height: 640,
+    position: 'absolute',
+    marginTop: 10,
+    marginLeft: '20%',
+    borderRadius: 15,
+
+    backgroundColor: '#394a41',
+  };
+
+  const navStyle = {
+    display: 'absolute'
   };
 
   useEffect(() => {
@@ -46,7 +57,7 @@ function App() {
       {/* <button onClick={() => console.log(currentPage.id)}>console.log current page</button> */}
       {currentPage ? <Page page={currentPage} pageService={pageService} setCurrentPage={setCurrentPage} /> : null}
 
-      <div>
+      <div style={navStyle}>
         {currentPage.id > 1 ? <p onClick={() => changePage('back')}>back</p> : null}
         <p>{currentPage.id}</p>
         {currentPage.id < pageCount ? <p onClick={() => changePage('forward')}>forward</p> : null}

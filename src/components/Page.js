@@ -3,7 +3,6 @@ import ToDo from "./ToDo";
 
 function Page({ page, pageService, setCurrentPage }) {
     const [toDoArr, setToDoArr] = useState({});
-    const [editedPage, setEditedPage] = useState({});
 
     useEffect(() => {
         if (page) {
@@ -12,10 +11,18 @@ function Page({ page, pageService, setCurrentPage }) {
     }, [page]);
 
     const pageStyle = {
-        // border: '1px solid black'
+        width: 600,
+        height: 600,
+        marginLeft: 20,
+        borderRadius: 15,
+
+        backgroundColor: '#f7f5f2',
     }
     const dateBoxStyle = {
-        // color: 'green'
+        backgroundColor: 'rgba(219, 210, 195, 0.5)',
+        borderRadius: 15,
+        width: 200,
+        marginLeft: 20,
     };
 
     function mapToDos() {
