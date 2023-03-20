@@ -9,7 +9,7 @@ function Page({ page, pageService, setCurrentPage }) {
     const pageStyle = {
         page: {
             width: 600,
-            height: 600,
+            height: 590,
             marginLeft: 20,
             marginTop: 20,
             borderRadius: 15,

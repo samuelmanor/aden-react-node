@@ -13,27 +13,34 @@ function App() {
   const [pageCount, setPageCount] = useState(0);
 
   const appStyle = {
-    width: 900,
-    height: 640,
-    position: 'absolute',
-    marginTop: 10,
-    marginLeft: '20%',
-    borderRadius: 15,
+    app: {
+      width: 800,
+      height: 630,
+      position: 'absolute',
+      marginTop: 10,
+      marginLeft: '25%',
+      borderRadius: 15,
+      backgroundColor: '#394a41',
+    },
 
-    backgroundColor: '#394a41',
+    nav: {
+      position: 'absolute',
+      // backgroundColor: 'red',
+      display: 'flex',
+      width: 600,
+      height: 50,
+      marginTop: 5,
+      marginLeft: 20,
+      fontSize: 25,
+      gap: 20,
+      justifyContent: 'space-evenly'
+    },
+
+    dir: {
+      // position: 'absolute',
+      // flexGrow: 1,
+    },
   };
-
-  const navStyle = {
-    display: 'absolute'
-  };
-
-  useEffect(() => {
-    pageService.pageCount()
-      .then(initialCount => {
-        setPageCount(initialCount);
-        getPage(initialCount);
-      }); 
-  }, []);
 
   function getPage(id) {
     pageService.getOne(id)
@@ -52,15 +59,22 @@ function App() {
     };
   };
 
+  useEffect(() => {
+    pageService.pageCount()
+      .then(initialCount => {
+        setPageCount(initialCount);
+        getPage(initialCount);
+      }); 
+  }, []);
+
   return (
-    <div style={appStyle}>
-      {/* <button onClick={() => console.log(currentPage.id)}>console.log current page</button> */}
+    <div style={appStyle.app}>
       {currentPage ? <Page page={currentPage} pageService={pageService} setCurrentPage={setCurrentPage} /> : null}
 
-      <div style={navStyle}>
-        {currentPage.id > 1 ? <p onClick={() => changePage('back')}>back</p> : null}
-        <p>{currentPage.id}</p>
-        {currentPage.id < pageCount ? <p onClick={() => changePage('forward')}>forward</p> : null}
+      <div style={appStyle.nav}>
+        {currentPage.id > 1 ? <p style={appStyle.dir} onClick={() => changePage('back')}>back</p> : null}
+        <p style={appStyle.dir} >{currentPage.id}</p>
+        {currentPage.id < pageCount ? <p style={appStyle.dir} onClick={() => changePage('forward')}>forward</p> : null}
       </div>
     </div>
   );
