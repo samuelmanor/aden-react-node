@@ -3,20 +3,17 @@ import ToDo from "./ToDo";
 
 function Page({ page, pageService, setCurrentPage }) {
     const [toDoArr, setToDoArr] = useState({});
-
-    useEffect(() => {
-        if (page) {
-            setToDoArr(page.todos);
-        }
-    }, [page]);
+    const [editingState, setEditingState] = useState(false);
+    const [entryText, setEntryText] = useState(page.entry);
 
     const pageStyle = {
         page: {
             width: 600,
             height: 600,
             marginLeft: 20,
+            marginTop: 20,
             borderRadius: 15,
-            backgroundColor: '#efece6',
+            backgroundColor: '#efece6'
         },
 
         dateBox: {
@@ -26,29 +23,84 @@ function Page({ page, pageService, setCurrentPage }) {
             height: 110,
             marginLeft: 20,
             marginTop: 20,
-            position: 'absolute',
+            position: 'absolute'
         },
 
         toDo: {
             position: 'absolute',
             marginLeft: 280,
-            marginTop: -12,
+            marginTop: 20
         },
-    }
 
-    function handleUpdate(taskId, k, newState) {
+        entry: {
+            position: 'absolute',
+            border: '2px solid rgba(219, 210, 195)',
+            borderRadius: 10,
+            height: 340,
+            width: 280,
+            marginLeft: 280,
+            marginTop: 150,
+            padding: 10,
+            backgroundColor: 'transparent',
+            resize: 'none',
+            fontSize: 17
+        },
+
+        button: {
+            position: 'absolute',
+            border: 'none',
+            backgroundColor: 'transparent',
+            fontSize: 22,
+            cursor: 'pointer',
+            marginLeft: 520,
+            marginTop: 478
+        }
+    };
+
+    useEffect(() => {
+        if (page) {
+            setToDoArr(page.todos);
+        }
+    }, [page]);
+
+    function handleUpdate(objId, keyToUpdate, newState) {
         const pageCopy = { ...page };
-        const toDoToUpdate = pageCopy.todos.find(t => t.id === taskId);
+        const toDoToUpdate = pageCopy.todos.find(t => t.id === objId);
 
-        if (k === 'task') {
+        if (keyToUpdate === 'task') {
             toDoToUpdate.task = newState;
             pageService.update(page.id, pageCopy)
                 .then(res => setCurrentPage(res));
-        } else if (k === 'state') {
+        } else if (keyToUpdate === 'state') {
             toDoToUpdate.completed = newState;
             pageService.update(page.id, pageCopy)
                 .then(res => setCurrentPage(res));
+        } else if (keyToUpdate === 'entry') {
+            pageCopy.entry = newState;
+            pageService.update(page.id, pageCopy)
+                .then(res => setCurrentPage(res));
         };
+    };
+
+    useEffect(() => {
+        const textArea = document.getElementById('text-area');
+        if (textArea) {
+            textArea.value = page.entry;
+            textArea.focus();
+        }
+    }, [editingState, page.entry]);
+
+    function handleTextChange() {
+        const textArea = document.getElementById('text-area');
+        setEntryText(textArea.value);
+    };
+
+    function updateEntry() {
+        if (entryText === '') {
+            setEntryText('lorem ipsum dolor sit amet');
+        }
+        handleUpdate(page.id, 'entry', entryText);
+        setEditingState(false);
     };
 
     function mapToDos() {
@@ -62,7 +114,12 @@ function Page({ page, pageService, setCurrentPage }) {
                 <h2>{page.month}</h2>
             </div>
 
-            <p>{page.entry}</p>
+            {editingState ? 
+                <div>
+                    <textarea style={pageStyle.entry} id='text-area' maxLength='550' onInput={handleTextChange} />
+                    <button style={pageStyle.button} onClick={updateEntry} >save</button>
+                </div>
+                : <p style={pageStyle.entry} onClick={() => setEditingState(true)} >{page.entry}</p>}
 
             <div style={pageStyle.toDo}>
                 {mapToDos()}

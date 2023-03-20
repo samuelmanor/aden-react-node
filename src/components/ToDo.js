@@ -12,7 +12,7 @@ function ToDo({ id, task, completed, handleUpdate }) {
             borderRadius: 10,
             marginLeft: 10,
             display: 'inline-block',
-            cursor: 'pointer',
+            cursor: 'pointer'
         },
 
         notDone: {
@@ -22,22 +22,22 @@ function ToDo({ id, task, completed, handleUpdate }) {
             border: '5px solid rgba(219, 210, 195, 0.8)',
             marginLeft: 10,
             display: 'inline-block',
-            cursor: 'pointer',
+            cursor: 'pointer'
         },
 
         p: {
             display: 'inline-block',
-            marginTop: 0,
             marginLeft: 10,
+            marginTop: 0,
             borderBottom: '2px solid rgba(219, 210, 195, 0.8)',
             width: 200,
-            fontSize: 17,
+            fontSize: 17
         },
 
         task: {
             display: 'inline-block',
             marginLeft: 10,
-            marginBottom: 16,
+            marginBottom: 16
         },
 
         input: {
@@ -45,13 +45,14 @@ function ToDo({ id, task, completed, handleUpdate }) {
             borderBottom: '2px solid rgba(219, 210, 195, 0.8)',
             backgroundColor: 'transparent',
             width: 200,
-            fontSize: 17,
+            fontSize: 17
         },
 
         button: {
             border: 'none',
             backgroundColor: 'transparent',
             fontSize: 18,
+            cursor: 'pointer'
         }
     };
 
@@ -65,7 +66,7 @@ function ToDo({ id, task, completed, handleUpdate }) {
         if (input) {
             input.focus();
         }
-    }, [editingState])
+    }, [editingState]);
 
     return (
         <div>
@@ -73,7 +74,7 @@ function ToDo({ id, task, completed, handleUpdate }) {
             
             {editingState ? 
             <div style={toDoStyle.task}>
-                <input style={toDoStyle.input} type='text' id='text-box' value={taskText} onChange={(e) => setTaskText(e.target.value)} /> 
+                <input style={toDoStyle.input} type='text' id='text-box' maxLength='25' value={taskText} onChange={(e) => setTaskText(e.target.value)} /> 
                 <button style={toDoStyle.button} onClick={updateTask}>save</button>
             </div>
             : <p onClick={() => setEditingState(true)} style={toDoStyle.p}>{taskText === '' ? 'add new...' : task}</p>}

@@ -46,12 +46,12 @@
       "todos": [
         {
           "task": "get groceries",
-          "completed": false,
+          "completed": true,
           "id": 1
         },
         {
           "task": "water plants",
-          "completed": false,
+          "completed": true,
           "id": 2
         },
         {
@@ -70,7 +70,7 @@
           "event": "wake up"
         }
       ],
-      "entry": "this is the second entry",
+      "entry": "lorem ipsum dolor sit amet",
       "images": [
         "https://64.media.tumblr.com/75eb17f23a594983f0fe9d71c5ece16c/bf0912c1f7be8f04-57/s1280x1920/8c06589ced7c3feb8169863fa4207c4aeeb061f3.jpg",
         "https://64.media.tumblr.com/742acfdeaf06d2f27bd4b2bd59fe0f1e/tumblr_o070m5PCkP1r7ezteo1_640.png",
