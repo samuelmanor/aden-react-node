@@ -95,7 +95,7 @@
         },
         {
           "task": "brush teeth",
-          "completed": false,
+          "completed": true,
           "id": 3
         }
       ],
@@ -129,7 +129,7 @@
         },
         {
           "task": "water plants",
-          "completed": false,
+          "completed": true,
           "id": 2
         },
         {

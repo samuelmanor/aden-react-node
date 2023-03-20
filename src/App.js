@@ -29,15 +29,19 @@ function App() {
       display: 'flex',
       width: 600,
       height: 50,
-      marginTop: 610,
+      marginTop: 625,
       marginLeft: 350,
-      fontSize: 25,
-      gap: 20,
+      // fontSize: 25,
+      // gap: 20,
       justifyContent: 'space-evenly'
     },
 
     dir: {
       cursor: 'pointer',
+      border: 'none',
+      backgroundColor: 'transparent',
+      fontSize: 25
+
     },
 
     firstPage: {
@@ -105,9 +109,9 @@ function App() {
       </div>
 
       <div style={appStyle.nav}>
-        {firstPage.id > 1 ? <p style={appStyle.dir} onClick={() => changePages('back')}>back</p> : <p style={appStyle.dir}>no more pages</p>}
+        {firstPage.id > 1 ? <button style={appStyle.dir} onClick={() => changePages('back')}>back</button> : <button style={appStyle.dir}>no more pages</button>}
         {/* <p style={appStyle.dir} >{firstPage.id}, {secondPage.id}</p> */}
-        {secondPage.id < pageCount ? <p style={appStyle.dir} onClick={() => changePages('forward')}>forward</p> : <p style={appStyle.dir}>create new</p>}
+        {secondPage.id < pageCount ? <button style={appStyle.dir} onClick={() => changePages('forward')}>forward</button> : <button style={appStyle.dir}>create new</button>}
       </div>
     </div>
   );
