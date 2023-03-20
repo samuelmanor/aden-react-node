@@ -10,8 +10,8 @@ function Page({ page, pageService, setCurrentPage }) {
         page: {
             width: 600,
             height: 590,
-            marginLeft: 20,
-            marginTop: 20,
+            // marginLeft: 20,
+            // marginTop: 20,
             borderRadius: 15,
             backgroundColor: '#efece6'
         },

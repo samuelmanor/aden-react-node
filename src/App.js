@@ -9,53 +9,73 @@ import Page from './components/Page';
 // getMonth() + 1 because its 0-index => 3
 
 function App() {
-  const [currentPage, setCurrentPage] = useState({});
   const [pageCount, setPageCount] = useState(0);
+  const [firstPage, setFirstPage] = useState({});
+  const [secondPage, setSecondPage] = useState({});
 
   const appStyle = {
     app: {
-      width: 800,
+      width: 1250,
       height: 630,
       position: 'absolute',
       marginTop: 10,
-      marginLeft: '25%',
+      marginLeft: '8%',
       borderRadius: 15,
       backgroundColor: '#394a41',
     },
 
     nav: {
       position: 'absolute',
-      // backgroundColor: 'red',
       display: 'flex',
       width: 600,
       height: 50,
-      marginTop: 5,
-      marginLeft: 20,
+      marginTop: 610,
+      marginLeft: 350,
       fontSize: 25,
       gap: 20,
       justifyContent: 'space-evenly'
     },
 
     dir: {
-      // position: 'absolute',
-      // flexGrow: 1,
+      cursor: 'pointer',
     },
+
+    firstPage: {
+      position: 'absolute',
+      marginTop: 20,
+      marginLeft: 20,
+    },
+
+    secondPage: {
+      position: 'absolute',
+      marginLeft: 630,
+      marginTop: 20,
+    }
   };
 
-  function getPage(id) {
+  function getFirstPage(id) {
     pageService.getOne(id)
       .then(initialPage => {
-        setCurrentPage(initialPage);
+        setFirstPage(initialPage);
       });
   };
 
-  function changePage(direction) {
+  function getSecondPage(id) {
+    pageService.getOne(id)
+      .then(initialPage => {
+        setSecondPage(initialPage);
+      });
+  };
+
+  function changePages(direction) {
     if (direction === 'forward') {
-      const nextPageId = currentPage.id + 1;
-      getPage(nextPageId);
+      const prevPage = { ...secondPage };
+      setFirstPage(prevPage);
+      getSecondPage(secondPage.id + 1);
     } else if (direction === 'back') {
-      const nextPageId = currentPage.id - 1;
-      getPage(nextPageId);
+      const prevPage = { ...firstPage };
+      setSecondPage(prevPage);
+      getFirstPage(firstPage.id - 1);
     };
   };
 
@@ -63,18 +83,31 @@ function App() {
     pageService.pageCount()
       .then(initialCount => {
         setPageCount(initialCount);
-        getPage(initialCount);
+
+        if (pageCount === 1) {
+          getSecondPage(pageCount);
+          setFirstPage({});
+        } else if (pageCount > 1) {
+          getSecondPage(pageCount);
+          getFirstPage(pageCount - 1);
+        };
       }); 
-  }, []);
+  }, [pageCount]);
 
   return (
     <div style={appStyle.app}>
-      {currentPage ? <Page page={currentPage} pageService={pageService} setCurrentPage={setCurrentPage} /> : null}
+      <div style={appStyle.firstPage}>
+        {firstPage !== {} ? <Page page={firstPage} pageService={pageService} setCurrentPage={setFirstPage} /> : null}
+      </div>
+
+      <div style={appStyle.secondPage}>
+        {secondPage !== {} ? <Page page={secondPage} pageService={pageService} setCurrentPage={setSecondPage} /> : null}
+      </div>
 
       <div style={appStyle.nav}>
-        {currentPage.id > 1 ? <p style={appStyle.dir} onClick={() => changePage('back')}>back</p> : null}
-        <p style={appStyle.dir} >{currentPage.id}</p>
-        {currentPage.id < pageCount ? <p style={appStyle.dir} onClick={() => changePage('forward')}>forward</p> : null}
+        {firstPage.id > 1 ? <p style={appStyle.dir} onClick={() => changePages('back')}>back</p> : <p style={appStyle.dir}>no more pages</p>}
+        {/* <p style={appStyle.dir} >{firstPage.id}, {secondPage.id}</p> */}
+        {secondPage.id < pageCount ? <p style={appStyle.dir} onClick={() => changePages('forward')}>forward</p> : <p style={appStyle.dir}>create new</p>}
       </div>
     </div>
   );
