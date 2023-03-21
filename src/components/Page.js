@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import CalRow from "./CalRow";
 import ToDo from "./ToDo";
 
 function Page({ page, pageService, setCurrentPage }) {
     const [toDoArr, setToDoArr] = useState({});
+    const [calArr, setCalArr] = useState([]);
     const [editingState, setEditingState] = useState(false);
     const [entryText, setEntryText] = useState(page.entry);
 
@@ -43,7 +45,7 @@ function Page({ page, pageService, setCurrentPage }) {
             padding: 10,
             backgroundColor: 'transparent',
             resize: 'none',
-            fontSize: 17
+            fontSize: 17,
         },
 
         button: {
@@ -54,12 +56,25 @@ function Page({ page, pageService, setCurrentPage }) {
             cursor: 'pointer',
             marginLeft: 520,
             marginTop: 478
+        },
+
+        cal: {
+            position: 'absolute',
+            width: 220,
+            height: 363,
+            paddingLeft: 10,
+            paddingRight: 10,
+            marginTop: 150,
+            marginLeft: 20,
+            borderRight: '2px solid rgba(219, 210, 195)',
+            overflow: 'scroll',
         }
     };
 
     useEffect(() => {
         if (page) {
             setToDoArr(page.todos);
+            setCalArr(page.events);
         }
     }, [page]);
 
@@ -79,6 +94,8 @@ function Page({ page, pageService, setCurrentPage }) {
             pageCopy.entry = newState;
             pageService.update(page.id, pageCopy)
                 .then(res => setCurrentPage(res));
+        } else if (keyToUpdate === 'event') {
+            console.log(newState);
         };
     };
 
@@ -103,8 +120,13 @@ function Page({ page, pageService, setCurrentPage }) {
         setEditingState(false);
     };
 
-    function mapToDos() {
+    function createToDos() {
         return toDoArr?.map?.(obj => <ToDo key={obj.id} id={obj.id} task={obj.task} completed={obj.completed} handleUpdate={handleUpdate} />);
+    };
+
+    function createCalEvents() {
+        const nums = [4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 0, 1, 2, 3];
+        return nums.map(n => <CalRow key={n} id={n} calArr={calArr} handleUpdate={handleUpdate} />);
     };
 
     return (
@@ -122,7 +144,13 @@ function Page({ page, pageService, setCurrentPage }) {
                 : <p style={pageStyle.entry} onClick={() => setEditingState(true)} >{page.entry}</p>}
 
             <div style={pageStyle.toDo}>
-                {mapToDos()}
+                {createToDos()}
+            </div>
+
+            <div style={pageStyle.cal}>
+                {createCalEvents()}
+
+                {/* <button onClick={createCalEvents}>cal events</button> */}
             </div>
         </div>
     )
