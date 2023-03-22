@@ -84,7 +84,7 @@ function App() {
     const today = new Date();
     const newPage = {
       "day": today.getDate(),
-      "month": today.getMonth(),
+      "month": today.getMonth() + 1,
       "todos": [
         {
           "task": '',
