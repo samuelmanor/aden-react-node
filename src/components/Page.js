@@ -78,7 +78,7 @@ function Page({ page, pageService, setCurrentPage }) {
         }
     }, [page]);
 
-    function handleUpdate(objId, keyToUpdate, newState) {
+    function handleUpdate(objId, keyToUpdate, newState) { // make this all separate functions
         const pageCopy = { ...page };
         const toDoToUpdate = pageCopy.todos.find(t => t.id === objId);
 
@@ -95,7 +95,20 @@ function Page({ page, pageService, setCurrentPage }) {
             pageService.update(page.id, pageCopy)
                 .then(res => setCurrentPage(res));
         } else if (keyToUpdate === 'event') {
-            console.log(newState);
+            const eventToUpdate = pageCopy.events.find(e => e.time === objId);
+
+            if (eventToUpdate) {
+                eventToUpdate.event = newState;
+                pageService.update(page.id, pageCopy)
+                    .then(res => setCurrentPage(res));
+            } else {
+                const newEvent = {"time": objId, "event": newState, "id": pageCopy.events.length + 1};
+                const newArr = pageCopy.events.concat(newEvent);
+                pageCopy.events = newArr;
+
+                pageService.update(page.id, pageCopy)
+                    .then(res => setCurrentPage(res));
+            };
         };
     };
 

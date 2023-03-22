@@ -113,6 +113,16 @@
           "time": 20,
           "event": "wake up",
           "id": 2
+        },
+        {
+          "time": 8,
+          "event": "water plants",
+          "id": 3
+        },
+        {
+          "time": 6,
+          "event": "wake up",
+          "id": 4
         }
       ],
       "images": [
