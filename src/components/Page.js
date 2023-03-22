@@ -109,6 +109,17 @@ function Page({ page, pageService, setCurrentPage }) {
     function handleUpdateEvent(id, state) {
         const pageCopy = { ...page };
         const toUpdate = pageCopy.events.find(e => e.time === id);
+
+        if (state === '') {
+            toUpdate.event = state;
+            const filteredEvents = pageCopy.events.filter(obj => obj.event !== '');
+            pageCopy.events = filteredEvents;
+            
+            
+            pageService.update(page.id, pageCopy)
+                .then(res => setCurrentPage(res));
+                return;
+        };
         
         if (toUpdate) {
             toUpdate.event = state;

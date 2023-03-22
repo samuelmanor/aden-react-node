@@ -159,16 +159,6 @@
           "time": 15,
           "event": "pick up friend @ airport",
           "id": 1
-        },
-        {
-          "time": 7,
-          "event": "",
-          "id": 2
-        },
-        {
-          "time": 8,
-          "event": "",
-          "id": 3
         }
       ],
       "entry": "this is the fourth",
