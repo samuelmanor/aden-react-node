@@ -12,8 +12,6 @@ function Page({ page, pageService, setCurrentPage }) {
         page: {
             width: 600,
             height: 590,
-            // marginLeft: 20,
-            // marginTop: 20,
             borderRadius: 15,
             backgroundColor: '#efece6'
         },
@@ -38,7 +36,7 @@ function Page({ page, pageService, setCurrentPage }) {
             position: 'absolute',
             border: '2px solid rgba(219, 210, 195)',
             borderRadius: 10,
-            height: 340,
+            height: 400,
             width: 280,
             marginLeft: 280,
             marginTop: 150,
@@ -61,7 +59,7 @@ function Page({ page, pageService, setCurrentPage }) {
         cal: {
             position: 'absolute',
             width: 220,
-            height: 363,
+            height: 420,
             paddingLeft: 10,
             paddingRight: 10,
             marginTop: 150,
