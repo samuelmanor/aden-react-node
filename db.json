@@ -162,8 +162,13 @@
         },
         {
           "time": 7,
-          "event": "wake up",
+          "event": "wake",
           "id": 2
+        },
+        {
+          "time": 8,
+          "event": "",
+          "id": 3
         }
       ],
       "entry": "this is the fourth",

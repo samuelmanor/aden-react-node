@@ -75,8 +75,16 @@ function Page({ page, pageService, setCurrentPage }) {
         if (page) {
             setToDoArr(page.todos);
             setCalArr(page.events);
-        }
+        };
     }, [page]);
+
+    useEffect(() => {
+        const textArea = document.getElementById('text-area');
+        if (textArea) {
+            textArea.value = page.entry;
+            textArea.focus();
+        }
+    }, [editingState, page.entry]);
 
     function handleUpdateTask(id, state) {
         const pageCopy = { ...page };
@@ -100,51 +108,24 @@ function Page({ page, pageService, setCurrentPage }) {
             .then(res => setCurrentPage(res));
     };
 
-    function handleUpdateEvent() {
-        // const eventToUpdate =
-    };
-
-    function handleUpdate(objId, keyToUpdate, newState) { // make this all separate functions
+    function handleUpdateEvent(id, state) {
         const pageCopy = { ...page };
-        // const toDoToUpdate = pageCopy.todos.find(t => t.id === objId);
+        const toUpdate = pageCopy.events.find(e => e.time === id);
+        
+        if (toUpdate) {
+            toUpdate.event = state;
 
-        if (keyToUpdate === 'task') {
-            // toDoToUpdate.task = newState;
-            // pageService.update(page.id, pageCopy)
-            //     .then(res => setCurrentPage(res));
-        } else if (keyToUpdate === 'state') {
-            // toDoToUpdate.completed = newState;
-            // pageService.update(page.id, pageCopy)
-                // .then(res => setCurrentPage(res));
-        } else if (keyToUpdate === 'entry') {
-            // pageCopy.entry = newState;
-            // pageService.update(page.id, pageCopy)
-            //     .then(res => setCurrentPage(res));
-        } else if (keyToUpdate === 'event') {
-            const eventToUpdate = pageCopy.events.find(e => e.time === objId);
+            pageService.update(page.id, pageCopy)
+                .then(res => setCurrentPage(res));
+        } else {
+            const newEvent = {"time": id, "event": state, "id": pageCopy.events.length + 1};
+            const newArr = pageCopy.events.concat(newEvent);
+            pageCopy.events = newArr;
 
-            if (eventToUpdate) {
-                eventToUpdate.event = newState;
-                pageService.update(page.id, pageCopy)
-                    .then(res => setCurrentPage(res));
-            } else {
-                const newEvent = {"time": objId, "event": newState, "id": pageCopy.events.length + 1};
-                const newArr = pageCopy.events.concat(newEvent);
-                pageCopy.events = newArr;
-
-                pageService.update(page.id, pageCopy)
-                    .then(res => setCurrentPage(res));
-            };
+            pageService.update(page.id, pageCopy)
+                .then(res => setCurrentPage(res));
         };
     };
-
-    useEffect(() => {
-        const textArea = document.getElementById('text-area');
-        if (textArea) {
-            textArea.value = page.entry;
-            textArea.focus();
-        }
-    }, [editingState, page.entry]);
 
     function handleTextChange() {
         const textArea = document.getElementById('text-area');
@@ -188,8 +169,6 @@ function Page({ page, pageService, setCurrentPage }) {
 
             <div style={pageStyle.cal}>
                 {createCalEvents()}
-
-                {/* <button onClick={() => handleUpdateTask()}>update test</button> */}
             </div>
         </div>
     )
