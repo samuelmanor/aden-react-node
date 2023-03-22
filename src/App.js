@@ -87,17 +87,17 @@ function App() {
       "month": today.getMonth(),
       "todos": [
         {
-          "task": 'add new...',
+          "task": '',
           "completed": false,
           "id": 1
         },
         {
-          "task": 'add new...',
+          "task": '',
           "completed": false,
           "id": 2
         },
         {
-          "task": 'add new...',
+          "task": '',
           "completed": false,
           "id": 3
         }

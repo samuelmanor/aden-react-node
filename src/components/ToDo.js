@@ -31,13 +31,14 @@ function ToDo({ id, task, completed, handleUpdateTask }) {
             marginTop: 0,
             borderBottom: '2px solid rgba(219, 210, 195, 0.8)',
             width: 200,
-            fontSize: 17
+            fontSize: 17,
+            minHeight: 20
         },
 
         task: {
             display: 'inline-block',
             marginLeft: 10,
-            marginBottom: 16
+            marginBottom: 16,
         },
 
         input: {
@@ -65,19 +66,23 @@ function ToDo({ id, task, completed, handleUpdateTask }) {
         const input = document.getElementById('text-box');
         if (input) {
             input.focus();
-        }
+        };
     }, [editingState]);
+
+    useEffect(() => {
+        setTaskText(task);
+    }, [task])
 
     return (
         <div>
-            {completed ? <div style={toDoStyle.done}onClick={() => handleUpdateTask(id, false)}></div> : <div style={toDoStyle.notDone} onClick={() => handleUpdateTask(id, true)}></div>}
+            {completed ? <div style={toDoStyle.done} onClick={() => handleUpdateTask(id, false)}></div> : <div style={toDoStyle.notDone} onClick={() => handleUpdateTask(id, true)}></div>}
             
             {editingState ? 
             <div style={toDoStyle.task}>
                 <input style={toDoStyle.input} type='text' id='text-box' maxLength='25' value={taskText} onChange={(e) => setTaskText(e.target.value)} /> 
                 <button style={toDoStyle.button} onClick={updateTask}>save</button>
             </div>
-            : <p onClick={() => setEditingState(true)} style={toDoStyle.p}>{task}</p>}
+            : <p id='task-text' onClick={() => setEditingState(true)} style={toDoStyle.p}>{task}</p>}
         </div>
     );
 };
