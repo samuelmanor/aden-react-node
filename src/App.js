@@ -1,12 +1,6 @@
-// import './App.css';
 import { useEffect, useState } from 'react';
 import pageService from './services/Pages';
 import Page from './components/Page';
-
-// new Date ex. Fri Mar 17 2023 16:59:43 GMT-0400 (Eastern Daylight Time)
-// creates as object
-// getDate() => 17
-// getMonth() + 1 because its 0-index => 3
 
 function App() {
   const [pageCount, setPageCount] = useState(0);
@@ -68,31 +62,75 @@ function App() {
       });
   };
 
-  function changePages(direction) {
-    if (direction === 'forward') {
-      const prevPage = { ...secondPage };
-      setFirstPage(prevPage);
-      getSecondPage(secondPage.id + 1);
-    } else if (direction === 'back') {
-      const prevPage = { ...firstPage };
-      setSecondPage(prevPage);
-      getFirstPage(firstPage.id - 1);
+  function goForward() {
+    const prevPage = { ...secondPage };
+    setFirstPage(prevPage);
+    getSecondPage(secondPage.id + 1);
+  };
+
+  function goBack() {
+    const prevPage = { ...firstPage };
+    setSecondPage(prevPage);
+    getFirstPage(firstPage.id - 1);
+  };
+
+  function showNewPage(newPage) {
+    const prevPage = { ...firstPage };
+    setFirstPage(prevPage);
+    setSecondPage(newPage);
+  }
+
+  function createPage() {
+    const today = new Date();
+    const newPage = {
+      "day": today.getDate(),
+      "month": today.getMonth(),
+      "todos": [
+        {
+          "task": 'add new...',
+          "completed": false,
+          "id": 1
+        },
+        {
+          "task": 'add new...',
+          "completed": false,
+          "id": 2
+        },
+        {
+          "task": 'add new...',
+          "completed": false,
+          "id": 3
+        }
+      ],
+      "events": [],
+      "entry": "write something..."
     };
+
+    pageService.create(newPage)
+      .then(res => {
+        getPageCount();
+        showNewPage(res);
+      })
+      
+  };
+
+  function getPageCount() {
+    pageService.pageCount()
+      .then(res => {
+        setPageCount(res);
+      })
   };
 
   useEffect(() => {
-    pageService.pageCount()
-      .then(initialCount => {
-        setPageCount(initialCount);
+    getPageCount();
 
-        if (pageCount === 1) {
-          getSecondPage(pageCount);
-          setFirstPage({});
-        } else if (pageCount > 1) {
-          getSecondPage(pageCount);
-          getFirstPage(pageCount - 1);
-        };
-      }); 
+    if (pageCount === 1) {
+      getSecondPage(pageCount);
+      setFirstPage({});
+    } else if (pageCount > 1) {
+      getSecondPage(pageCount);
+      getFirstPage(pageCount - 1);
+    };
   }, [pageCount]);
 
   return (
@@ -106,9 +144,9 @@ function App() {
       </div>
 
       <div style={appStyle.nav}>
-        {firstPage.id > 1 ? <button style={appStyle.dir} onClick={() => changePages('back')}>back</button> : <button style={{ ...appStyle.dir, cursor: 'default' }}>no more pages</button>}
+        {firstPage.id > 1 ? <button style={appStyle.dir} onClick={goBack}>back</button> : <button style={{ ...appStyle.dir, cursor: 'default' }}>no more pages</button>}
 
-        {secondPage.id < pageCount ? <button style={appStyle.dir} onClick={() => changePages('forward')}>forward</button> : <button style={appStyle.dir}>create new</button>}
+        {secondPage.id < pageCount ? <button style={appStyle.dir} onClick={goForward}>forward</button> : <button onClick={createPage} style={appStyle.dir}>new page</button>}
       </div>
     </div>
   );

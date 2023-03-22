@@ -3,7 +3,6 @@
     {
       "day": 15,
       "month": 3,
-      "year": 2023,
       "todos": [
         {
           "task": "get groceries",
@@ -34,17 +33,11 @@
         }
       ],
       "entry": "this is the first entry",
-      "images": [
-        "https://64.media.tumblr.com/75eb17f23a594983f0fe9d71c5ece16c/bf0912c1f7be8f04-57/s1280x1920/8c06589ced7c3feb8169863fa4207c4aeeb061f3.jpg",
-        "https://64.media.tumblr.com/742acfdeaf06d2f27bd4b2bd59fe0f1e/tumblr_o070m5PCkP1r7ezteo1_640.png",
-        ""
-      ],
       "id": 1
     },
     {
       "day": 16,
       "month": 3,
-      "year": 2023,
       "todos": [
         {
           "task": "get groceries",
@@ -75,17 +68,11 @@
         }
       ],
       "entry": "this is the second page",
-      "images": [
-        "https://64.media.tumblr.com/75eb17f23a594983f0fe9d71c5ece16c/bf0912c1f7be8f04-57/s1280x1920/8c06589ced7c3feb8169863fa4207c4aeeb061f3.jpg",
-        "https://64.media.tumblr.com/742acfdeaf06d2f27bd4b2bd59fe0f1e/tumblr_o070m5PCkP1r7ezteo1_640.png",
-        ""
-      ],
       "id": 2
     },
     {
       "day": 17,
       "month": 3,
-      "year": 2023,
       "todos": [
         {
           "task": "get grocery",
@@ -125,18 +112,12 @@
           "id": 4
         }
       ],
-      "images": [
-        "https://64.media.tumblr.com/75eb17f23a594983f0fe9d71c5ece16c/bf0912c1f7be8f04-57/s1280x1920/8c06589ced7c3feb8169863fa4207c4aeeb061f3.jpg",
-        "https://64.media.tumblr.com/742acfdeaf06d2f27bd4b2bd59fe0f1e/tumblr_o070m5PCkP1r7ezteo1_640.png",
-        ""
-      ],
       "id": 3,
       "entry": "lorem"
     },
     {
       "day": 18,
       "month": 3,
-      "year": 2023,
       "todos": [
         {
           "task": "get groceries",
@@ -162,11 +143,6 @@
         }
       ],
       "entry": "this is the fourth",
-      "images": [
-        "https://64.media.tumblr.com/75eb17f23a594983f0fe9d71c5ece16c/bf0912c1f7be8f04-57/s1280x1920/8c06589ced7c3feb8169863fa4207c4aeeb061f3.jpg",
-        "https://64.media.tumblr.com/742acfdeaf06d2f27bd4b2bd59fe0f1e/tumblr_o070m5PCkP1r7ezteo1_640.png",
-        ""
-      ],
       "id": 4
     }
   ]

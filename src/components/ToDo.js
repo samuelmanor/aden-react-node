@@ -77,7 +77,7 @@ function ToDo({ id, task, completed, handleUpdateTask }) {
                 <input style={toDoStyle.input} type='text' id='text-box' maxLength='25' value={taskText} onChange={(e) => setTaskText(e.target.value)} /> 
                 <button style={toDoStyle.button} onClick={updateTask}>save</button>
             </div>
-            : <p onClick={() => setEditingState(true)} style={toDoStyle.p}>{taskText === '' ? 'add new...' : task}</p>}
+            : <p onClick={() => setEditingState(true)} style={toDoStyle.p}>{task}</p>}
         </div>
     );
 };
