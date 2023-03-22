@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function ToDo({ id, task, completed, handleUpdate }) {
+function ToDo({ id, task, completed, handleUpdateTask }) {
     const [editingState, setEditingState] = useState(false);
     const [taskText, setTaskText] = useState(task);
 
@@ -57,7 +57,7 @@ function ToDo({ id, task, completed, handleUpdate }) {
     };
 
     function updateTask() {
-        handleUpdate(id, 'task', taskText);
+        handleUpdateTask(id, taskText);
         setEditingState(false);
     };
 
@@ -70,7 +70,7 @@ function ToDo({ id, task, completed, handleUpdate }) {
 
     return (
         <div>
-            {completed ? <div style={toDoStyle.done}onClick={() => handleUpdate(id, 'state', false)}></div> : <div style={toDoStyle.notDone} onClick={() => handleUpdate(id, 'state', true)}></div>}
+            {completed ? <div style={toDoStyle.done}onClick={() => handleUpdateTask(id, false)}></div> : <div style={toDoStyle.notDone} onClick={() => handleUpdateTask(id, true)}></div>}
             
             {editingState ? 
             <div style={toDoStyle.task}>
