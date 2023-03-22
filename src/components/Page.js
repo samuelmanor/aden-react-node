@@ -23,7 +23,18 @@ function Page({ page, pageService, setCurrentPage }) {
             height: 110,
             marginLeft: 20,
             marginTop: 20,
-            position: 'absolute'
+            position: 'absolute',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 20,
+            fontSize: 40,
+            alignItems: 'center',
+        },
+
+        month: {
+            fontSize: 40,
+            borderRight: '5px solid rgba(219, 210, 195)',
+            paddingRight: 20
         },
 
         toDo: {
@@ -161,8 +172,8 @@ function Page({ page, pageService, setCurrentPage }) {
     return (
         <div style={pageStyle.page}>
             <div style={pageStyle.dateBox}>
+                <h2 style={pageStyle.month}>{page.month}</h2>
                 <h2>{page.day}</h2>
-                <h2>{page.month}</h2>
             </div>
 
             {editingState ? 
