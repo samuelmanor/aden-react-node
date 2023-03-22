@@ -28,6 +28,13 @@ function CalRow({ id, calArr, handleUpdateEvent }) {
             backgroundColor: 'transparent',
             fontSize: 15,
             width: 150
+        }, 
+
+        button: {
+            border: 'none',
+            backgroundColor: 'transparent',
+            fontSize: 15,
+            cursor: 'pointer'
         }
     };
 
