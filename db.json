@@ -1,7 +1,7 @@
 {
   "pages": [
     {
-      "day": 15,
+      "day": 20,
       "month": 3,
       "todos": [
         {
@@ -11,32 +11,32 @@
         },
         {
           "task": "water plants",
-          "completed": false,
+          "completed": true,
           "id": 2
         },
         {
           "task": "brush teeth",
-          "completed": false,
+          "completed": true,
           "id": 3
         }
       ],
       "events": [
         {
           "time": 6,
-          "event": "pick up friend @ airport",
+          "event": "wake up",
           "id": 1
         },
         {
-          "time": 3,
-          "event": "wake up",
+          "time": 11,
+          "event": "doctor's appt",
           "id": 2
         }
       ],
-      "entry": "this is the first entry",
+      "entry": "woke up 30mins later than usual",
       "id": 1
     },
     {
-      "day": 16,
+      "day": 21,
       "month": 3,
       "todos": [
         {
@@ -45,13 +45,13 @@
           "id": 1
         },
         {
-          "task": "water plants",
-          "completed": false,
+          "task": "vacuum living room",
+          "completed": true,
           "id": 2
         },
         {
           "task": "brush teeth",
-          "completed": false,
+          "completed": true,
           "id": 3
         }
       ],
@@ -62,25 +62,30 @@
           "id": 1
         },
         {
-          "time": 7,
+          "time": 6,
           "event": "wake up",
           "id": 2
+        },
+        {
+          "time": 12,
+          "event": "lunch w/ friends",
+          "id": 3
         }
       ],
-      "entry": "this is the second page",
+      "entry": "need to do laundry later this week",
       "id": 2
     },
     {
-      "day": 17,
+      "day": 22,
       "month": 3,
       "todos": [
         {
-          "task": "get grocery",
+          "task": "laundry",
           "completed": true,
           "id": 1
         },
         {
-          "task": "water plants",
+          "task": "schedule vet appt",
           "completed": false,
           "id": 2
         },
@@ -102,36 +107,31 @@
           "id": 2
         },
         {
-          "time": 8,
-          "event": "water plants",
-          "id": 3
-        },
-        {
           "time": 6,
           "event": "wake up",
           "id": 4
         }
       ],
       "id": 3,
-      "entry": "lorem"
+      "entry": "got to take a walk after lunch"
     },
     {
-      "day": 18,
+      "day": 23,
       "month": 3,
       "todos": [
         {
-          "task": "get groceries",
+          "task": "schedule vet appt",
           "completed": true,
           "id": 1
         },
         {
-          "task": "water plants",
+          "task": "brush teeth",
           "completed": true,
           "id": 2
         },
         {
-          "task": "brush teeth",
-          "completed": false,
+          "task": "",
+          "completed": true,
           "id": 3
         }
       ],
@@ -147,12 +147,12 @@
           "id": 2
         },
         {
-          "time": 7,
-          "event": "hello",
+          "time": 12,
+          "event": "lunch w/ friends",
           "id": 3
         }
       ],
-      "entry": "lorem ipsum dolor sit amet",
+      "entry": "cloudy all day",
       "id": 4
     }
   ]

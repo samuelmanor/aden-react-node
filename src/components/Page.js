@@ -7,7 +7,7 @@ function Page({ page, pageService, setCurrentPage, deletePage }) {
     const [toDoArr, setToDoArr] = useState({});
     const [calArr, setCalArr] = useState([]);
     const [editingState, setEditingState] = useState(false);
-    const [entryText, setEntryText] = useState(page.entry);
+    const [entryText, setEntryText] = useState('');
     const [showNotif, setShowNotif] = useState(false);
 
     const pageStyle = {
@@ -54,7 +54,7 @@ function Page({ page, pageService, setCurrentPage, deletePage }) {
             marginLeft: 280,
             marginTop: 150,
             padding: 10,
-            backgroundColor: 'transparent',
+            backgroundColor: '#efece6',
             resize: 'none',
             fontSize: 17
         },
@@ -93,6 +93,7 @@ function Page({ page, pageService, setCurrentPage, deletePage }) {
         if (page) {
             setToDoArr(page.todos);
             setCalArr(page.events);
+            setEntryText(page.entry);
         };
     }, [page]);
 
