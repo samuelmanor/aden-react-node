@@ -66,7 +66,7 @@ function Page({ page, pageService, setCurrentPage, deletePage }) {
             fontSize: 22,
             cursor: 'pointer',
             marginLeft: 520,
-            marginTop: 478
+            marginTop: 535
         },
 
         cal: {

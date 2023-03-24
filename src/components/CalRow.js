@@ -38,7 +38,7 @@ function CalRow({ id, calArr, handleUpdateEvent }) {
         }
     };
 
-    // useEffect(() => { // none of this works now lol
+    // useEffect(() => { // none of this works now lol ALSO fix save button placement for entry
     //     let obj;
     //     if (calArr) {
     //         obj = calArr.find(e => e.time === id);
