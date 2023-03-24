@@ -150,6 +150,11 @@
           "time": 12,
           "event": "lunch w/ friends",
           "id": 3
+        },
+        {
+          "time": 23,
+          "event": "go to bed",
+          "id": 4
         }
       ],
       "entry": "cloudy all day",
