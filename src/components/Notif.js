@@ -32,7 +32,7 @@ function Notif({ id, day, month, show, setShow, deletePage }) {
     };
 
     if (show === false) {
-        return null
+        return null;
     };
 
     function handleNo() {

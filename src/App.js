@@ -15,7 +15,7 @@ function App() {
       marginTop: 10,
       marginLeft: '8%',
       borderRadius: 15,
-      backgroundColor: '#394a41',
+      backgroundColor: '#394a41'
     },
 
     nav: {
@@ -38,13 +38,13 @@ function App() {
     firstPage: {
       position: 'absolute',
       marginTop: 20,
-      marginLeft: 20,
+      marginLeft: 20
     },
 
     secondPage: {
       position: 'absolute',
       marginLeft: 630,
-      marginTop: 20,
+      marginTop: 20
     }
   };
 
@@ -110,8 +110,7 @@ function App() {
       .then(res => {
         getPageCount();
         showNewPage(res);
-      })
-      
+      });
   };
 
   function deletePage(id) {
@@ -119,14 +118,14 @@ function App() {
       .then(() => {
         getPageCount();
         goBack();
-      })
+      });
   };
 
   function getPageCount() {
     pageService.pageCount()
       .then(res => {
         setPageCount(res);
-      })
+      });
   };
 
   useEffect(() => {

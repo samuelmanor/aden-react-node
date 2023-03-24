@@ -101,7 +101,7 @@ function Page({ page, pageService, setCurrentPage, deletePage }) {
         if (textArea) {
             textArea.value = page.entry;
             textArea.focus();
-        }
+        };
     }, [editingState, page.entry]);
 
     function handleUpdateTask(id, state) {
@@ -135,7 +135,6 @@ function Page({ page, pageService, setCurrentPage, deletePage }) {
             const filteredEvents = pageCopy.events.filter(obj => obj.event !== '');
             pageCopy.events = filteredEvents;
             
-            
             pageService.update(page.id, pageCopy)
                 .then(res => setCurrentPage(res));
                 return;
@@ -162,9 +161,6 @@ function Page({ page, pageService, setCurrentPage, deletePage }) {
     };
 
     function updateEntry() {
-        if (entryText === '') {
-            setEntryText('lorem ipsum dolor sit amet');
-        }
         handleUpdateEntry(entryText);
         setEditingState(false);
     };
@@ -208,7 +204,7 @@ function Page({ page, pageService, setCurrentPage, deletePage }) {
 
             <Notif id={page.id} day={page.day} month={page.month} show={showNotif} setShow={setShowNotif} deletePage={deletePage} />
         </div>
-    )
+    );
 };
 
 export default Page;

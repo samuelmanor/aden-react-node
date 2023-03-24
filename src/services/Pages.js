@@ -26,6 +26,6 @@ const getOne = (id) => {
     return req.then(res => res.data);
 };
 
-const exportObj = { create, update, remove, pageCount, getOne }
+const exportObj = { create, update, remove, pageCount, getOne };
 
 export default exportObj;
