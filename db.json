@@ -140,6 +140,16 @@
           "time": 15,
           "event": "pick up friend @ airport",
           "id": 1
+        },
+        {
+          "time": 6,
+          "event": "wake up",
+          "id": 2
+        },
+        {
+          "time": 7,
+          "event": "hello",
+          "id": 3
         }
       ],
       "entry": "this is the fourth",

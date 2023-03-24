@@ -34,12 +34,12 @@ function ToDo({ id, task, completed, handleUpdateTask }) {
             marginTop: 0,
             borderBottom: '2px solid rgba(219, 210, 195, 0.8)',
             width: 200,
-            fontSize: 17,
+            fontSize: 17
         },
 
         task: {
             marginLeft: 10,
-            marginBottom: 16,
+            marginBottom: 16
         },
 
         input: {
@@ -72,7 +72,7 @@ function ToDo({ id, task, completed, handleUpdateTask }) {
 
     useEffect(() => {
         setTaskText(task);
-    }, [task])
+    }, [task]);
 
     return (
         <div style={toDoStyle.div}>

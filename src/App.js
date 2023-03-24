@@ -78,7 +78,7 @@ function App() {
     const prevPage = { ...firstPage };
     setFirstPage(prevPage);
     setSecondPage(newPage);
-  }
+  };
 
   function createPage() {
     const today = new Date();
@@ -114,6 +114,14 @@ function App() {
       
   };
 
+  function deletePage(id) {
+    pageService.remove(id)
+      .then(() => {
+        getPageCount();
+        goBack();
+      })
+  };
+
   function getPageCount() {
     pageService.pageCount()
       .then(res => {
@@ -136,11 +144,11 @@ function App() {
   return (
     <div style={appStyle.app}>
       <div style={appStyle.firstPage}>
-        {firstPage !== {} ? <Page page={firstPage} pageService={pageService} setCurrentPage={setFirstPage} /> : null}
+        {firstPage !== {} ? <Page page={firstPage} pageService={pageService} setCurrentPage={setFirstPage} deletePage={deletePage} /> : null}
       </div>
 
       <div style={appStyle.secondPage}>
-        {secondPage !== {} ? <Page page={secondPage} pageService={pageService} setCurrentPage={setSecondPage} /> : null}
+        {secondPage !== {} ? <Page page={secondPage} pageService={pageService} setCurrentPage={setSecondPage} deletePage={deletePage} /> : null}
       </div>
 
       <div style={appStyle.nav}>

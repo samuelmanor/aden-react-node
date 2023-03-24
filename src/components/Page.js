@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import CalRow from "./CalRow";
+import Notif from "./Notif";
 import ToDo from "./ToDo";
 
-function Page({ page, pageService, setCurrentPage }) {
+function Page({ page, pageService, setCurrentPage, deletePage }) {
     const [toDoArr, setToDoArr] = useState({});
     const [calArr, setCalArr] = useState([]);
     const [editingState, setEditingState] = useState(false);
     const [entryText, setEntryText] = useState(page.entry);
+    const [showNotif, setShowNotif] = useState(false);
 
     const pageStyle = {
         page: {
@@ -28,24 +30,24 @@ function Page({ page, pageService, setCurrentPage }) {
             justifyContent: 'center',
             gap: 20,
             fontSize: 40,
-            alignItems: 'center',
+            alignItems: 'center'
         },
 
         month: {
             fontSize: 40,
-            borderRight: '5px solid rgba(219, 210, 195)',
+            borderRight: '5px solid rgb(219, 210, 195)',
             paddingRight: 20
         },
 
         toDo: {
             position: 'absolute',
-            marginLeft: 280,
+            marginLeft: 275,
             marginTop: 20
         },
 
         entry: {
             position: 'absolute',
-            border: '2px solid rgba(219, 210, 195)',
+            border: '2px solid rgb(219, 210, 195)',
             borderRadius: 10,
             height: 400,
             width: 280,
@@ -54,7 +56,7 @@ function Page({ page, pageService, setCurrentPage }) {
             padding: 10,
             backgroundColor: 'transparent',
             resize: 'none',
-            fontSize: 17,
+            fontSize: 17
         },
 
         button: {
@@ -76,7 +78,14 @@ function Page({ page, pageService, setCurrentPage }) {
             marginTop: 150,
             marginLeft: 20,
             borderRight: '2px solid rgba(219, 210, 195)',
-            overflow: 'scroll',
+            overflow: 'scroll'
+        },
+
+        delete: {
+            position: 'absolute',
+            marginLeft: 570,
+            fontSize: 35,
+            cursor: 'pointer'
         }
     };
 
@@ -160,6 +169,10 @@ function Page({ page, pageService, setCurrentPage }) {
         setEditingState(false);
     };
 
+    function handleDeletePage() {
+        setShowNotif(true);
+    };
+
     function createToDos() {
         return toDoArr?.map?.(obj => <ToDo key={obj.id} id={obj.id} task={obj.task} completed={obj.completed} handleUpdateTask={handleUpdateTask} />);
     };
@@ -190,6 +203,10 @@ function Page({ page, pageService, setCurrentPage }) {
             <div style={pageStyle.cal}>
                 {createCalEvents()}
             </div>
+
+            <div style={pageStyle.delete} onClick={handleDeletePage}>x</div>
+
+            <Notif id={page.id} day={page.day} month={page.month} show={showNotif} setShow={setShowNotif} deletePage={deletePage} />
         </div>
     )
 };

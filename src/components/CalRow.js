@@ -10,17 +10,17 @@ function CalRow({ id, calArr, handleUpdateEvent }) {
             cursor: 'pointer',
             fontSize: 15,
             display: 'flex',
-            alignItems: 'center',
+            alignItems: 'center'
         },
 
         hover: {
-            backgroundColor: 'rgba(219, 210, 195, 0.5)',
+            backgroundColor: 'rgba(219, 210, 195, 0.5)'
         },
 
         event: {
             marginLeft: 10,
             width: 200,
-            minHeight: 20,
+            minHeight: 20
         },
 
         input: {
@@ -38,34 +38,34 @@ function CalRow({ id, calArr, handleUpdateEvent }) {
         }
     };
 
-    useEffect(() => {
-        let obj;
-        if (calArr) {
-            obj = calArr.find(e => e.time === id);
-        };
+    // useEffect(() => { // none of this works now lol
+    //     let obj;
+    //     if (calArr) {
+    //         obj = calArr.find(e => e.time === id);
+    //     };
 
-        if (obj) {
-            setEventText(obj.event);
-        };
-    }, [calArr, id]);
+    //     if (obj) {
+    //         setEventText(obj.event);
+    //     };
+    // }, [calArr, id]);
 
-    useEffect(() => {
-        const input = document.getElementById('event-input');
-        if (input) {
-            input.focus();
-        };
-    }, [editingState]);
+    // useEffect(() => {
+    //     const input = document.getElementById('event-input');
+    //     if (input) {
+    //         input.focus();
+    //     };
+    // }, [editingState]);
 
-    function updateEvent() {
-        handleUpdateEvent(id, eventText);
-        setEditingState(false);
-    };
+    // function updateEvent() {
+    //     handleUpdateEvent(id, eventText);
+    //     setEditingState(false);
+    // };
 
     return (
         <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style={{ ...calStyle.normal, ...(hover ? calStyle.hover : null)}}>
-            <p>{id % 3 === 0 || id === 0 ? id : '-'}</p>
+            {/* <p>{id % 3 === 0 || id === 0 ? id : '-'}</p> */}
 
-            {editingState 
+            {/* {editingState 
                 ? 
                 <div>
                     <input id='event-input' maxLength='20' value={eventText} onChange={(e) => setEventText(e.target.value)} style={{ ...calStyle.event, ...calStyle.input }} />
@@ -73,7 +73,7 @@ function CalRow({ id, calArr, handleUpdateEvent }) {
                 </div>
                 : 
                 <div style={calStyle.event} onClick={() => setEditingState(true)}>{eventText}</div>
-            }
+            } */}
         </div>
     );
 };
