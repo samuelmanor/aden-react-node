@@ -38,42 +38,36 @@ function CalRow({ id, calArr, handleUpdateEvent }) {
         }
     };
 
-    // useEffect(() => { // none of this works now lol ALSO fix save button placement for entry
-    //     let obj;
-    //     if (calArr) {
-    //         obj = calArr.find(e => e.time === id);
-    //     };
+    function updateEvent() {
+        handleUpdateEvent(id, eventText);
+        setEditingState(false);
+    };
 
-    //     if (obj) {
-    //         setEventText(obj.event);
-    //     };
-    // }, [calArr, id]);
+    useEffect(() => {
+        if (calArr) {
+            const obj = calArr.find(e => e.time === id);
+            obj ? setEventText(obj.event) : setEventText('');
+        };
+    }, [calArr, id]);
 
-    // useEffect(() => {
-    //     const input = document.getElementById('event-input');
-    //     if (input) {
-    //         input.focus();
-    //     };
-    // }, [editingState]);
-
-    // function updateEvent() {
-    //     handleUpdateEvent(id, eventText);
-    //     setEditingState(false);
-    // };
+    useEffect(() => {
+        const input = document.getElementById('event-input');
+        if (input) {
+            input.focus();
+        };
+    }, [editingState]);
 
     return (
         <div onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} style={{ ...calStyle.normal, ...(hover ? calStyle.hover : null)}}>
-            {/* <p>{id % 3 === 0 || id === 0 ? id : '-'}</p> */}
-
-            {/* {editingState 
-                ? 
-                <div>
-                    <input id='event-input' maxLength='20' value={eventText} onChange={(e) => setEventText(e.target.value)} style={{ ...calStyle.event, ...calStyle.input }} />
-                    <button style={calStyle.button} onClick={updateEvent}>save</button>
-                </div>
-                : 
-                <div style={calStyle.event} onClick={() => setEditingState(true)}>{eventText}</div>
-            } */}
+            <p>{id % 3 === 0 || id === 0 ? id : '-'}</p>
+            {editingState
+            ?
+            <div>
+                <input id='event-input' maxLength='20' value={eventText} onChange={(e) => setEventText(e.target.value)} style={{ ...calStyle.event, ...calStyle.input }} />
+                <button style={calStyle.button} onClick={updateEvent}>save</button>
+            </div>
+            :
+            <div style={calStyle.event} onClick={() => setEditingState(true)}>{eventText}</div>}
         </div>
     );
 };
